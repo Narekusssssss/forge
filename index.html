@@ -1,90 +1,64 @@
-/* Переменные для легкой смены цветов */
-:root {
-    --bg-body: #0f172a;
-    --bg-card: #1e293b;
-    --sidebar: #1e293b;
-    --accent: #38bdf8;
-    --text-white: #f8fafc;
-    --text-gray: #94a3b8;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключаем иконки для красоты -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+</head>
+<body>
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    <div class="container">
+        <!-- Боковое меню (Sidebar) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="logo-icon">🚀</span>
+                <span class="logo-text">ADMIN.UI</span>
+            </div>
+            <nav class="menu">
+                <a href="#" class="menu-link active"><span class="material-icons">dashboard</span> Главная</a>
+                <a href="#" class="menu-link"><span class="material-icons">article</span> Посты</a>
+                <a href="#" class="menu-link"><span class="material-icons">analytics</span> Аналитика</a>
+                <a href="#" class="menu-link"><span class="material-icons">settings</span> Настройки</a>
+            </nav>
+        </aside>
 
-body { background: var(--bg-body); color: var(--text-white); overflow-x: hidden; }
+        <!-- Основной контент -->
+        <main class="main">
+            <header class="navbar">
+                <button class="toggle-btn" id="toggleBtn">
+                    <span class="material-icons">menu</span>
+                </button>
+                <h1>Консоль управления</h1>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com" alt="Avatar">
+                </div>
+            </header>
 
-.container { display: flex; min-height: 100vh; }
+            <section class="content">
+                <!-- Форма создания -->
+                <div class="card create-post">
+                    <h2>Новая публикация</h2>
+                    <input type="text" id="postTitle" placeholder="Заголовок статьи...">
+                    <textarea id="postContent" placeholder="Текст вашей публикации..."></textarea>
+                    <button class="btn-pub" onclick="createPost()">
+                        <span class="material-icons">send</span> Опубликовать
+                    </button>
+                </div>
 
-/* --- SIDEBAR --- */
-.sidebar {
-    width: 260px;
-    background: var(--sidebar);
-    border-right: 1px solid #334155;
-    padding: 20px;
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-}
+                <!-- Лента постов -->
+                <div class="feed-header">
+                    <h2>Лента публикаций</h2>
+                </div>
+                <div id="postsList" class="posts-grid">
+                    <!-- Сюда скрипт добавит посты -->
+                </div>
+            </section>
+        </main>
+    </div>
 
-.sidebar-header { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
-.logo-text { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; color: var(--accent); }
-
-.menu-link {
-    display: flex; align-items: center; gap: 12px;
-    color: var(--text-gray); text-decoration: none;
-    padding: 12px 15px; border-radius: 10px; margin-bottom: 5px;
-    transition: var(--transition);
-}
-
-.menu-link:hover, .menu-link.active { background: #334155; color: var(--accent); }
-
-/* --- MAIN CONTENT --- */
-.main { flex: 1; display: flex; flex-direction: column; }
-
-.navbar {
-    height: 70px; background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(10px); display: flex;
-    align-items: center; justify-content: space-between;
-    padding: 0 30px; border-bottom: 1px solid #334155;
-    position: sticky; top: 0; z-index: 10;
-}
-
-.toggle-btn { background: none; border: none; color: white; cursor: pointer; display: none; }
-
-.user-profile img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); }
-
-.content { padding: 30px; max-width: 1200px; margin: 0 auto; width: 100%; }
-
-/* --- CARDS & FORMS --- */
-.card { background: var(--bg-card); padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 40px; }
-
-input, textarea {
-    width: 100%; background: #0f172a; border: 1px solid #334155;
-    padding: 15px; border-radius: 8px; color: white; margin-bottom: 15px; font-size: 16px;
-}
-
-textarea { height: 120px; resize: vertical; }
-
-.btn-pub {
-    background: var(--accent); color: #0f172a; border: none;
-    padding: 12px 25px; border-radius: 8px; font-weight: bold;
-    cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s;
-}
-
-.btn-pub:hover { filter: brightness(1.1); transform: translateY(-2px); }
-
-/* --- POSTS GRID --- */
-.posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-.post-item { background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent); animation: fadeIn 0.5s ease; }
-.post-item h3 { margin-bottom: 10px; color: var(--accent); }
-.post-item p { color: var(--text-gray); line-height: 1.5; font-size: 14px; }
-
-/* --- RESPONSIVE (ПК и Мобилка) --- */
-@media (max-width: 992px) {
-    .sidebar { position: fixed; left: -260px; height: 100%; z-index: 100; }
-    .sidebar.active { left: 0; }
-    .toggle-btn { display: block; }
-}
-
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    <script src="script.js"></script>
+</body>
+</html>
