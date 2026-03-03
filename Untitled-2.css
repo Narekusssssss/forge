@@ -1,0 +1,113 @@
+/* Основные настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+/* Контейнер */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 260px;
+    background-color: #1e293b;
+    padding: 20px;
+    border-right: 1px solid #334155;
+}
+
+.sidebar-header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-bottom: 30px;
+}
+
+.menu-link {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.menu-link:hover, .active {
+    background-color: #334155;
+    color: #ffffff;
+}
+
+/* Основной контент */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Форма публикации */
+.card {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+input, textarea {
+    width: 100%;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: white;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.btn-pub {
+    background-color: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Сетка постов */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.post-item {
+    background-color: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #38bdf8;
+}
+
+/* Адаптив для мобилок */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+}
